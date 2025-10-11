@@ -1,4 +1,4 @@
-import { Document } from "mongoose";
+import mongoose, { Document } from "mongoose";
 
 export interface IResult extends Document {
     resultId: string;
@@ -6,6 +6,6 @@ export interface IResult extends Document {
     predictedCondition: string;
     trandCategory: string;
     computedAt: Date;
-    patientId: string;
-    datasetId: string;
+    patientId?: mongoose.Types.ObjectId;
+    datasetId?: mongoose.Types.ObjectId;
 }

@@ -1,12 +1,13 @@
 import express from "express";
 import { googleAuthUrl, googleCallback, me, signin, signup, updateProfile } from "../controller/AuthController";
+import { authMiddleware } from "../middleware/authMiddleware";
 
 const router = express.Router();
 
 router.post('/signin', signin);
 router.post('/signup', signup);
-router.get('/me', me);
-router.put('/me', updateProfile);
+router.get('/me', authMiddleware, me);
+router.put('/me', authMiddleware, updateProfile);
 
 
 router.get('/google', googleAuthUrl);

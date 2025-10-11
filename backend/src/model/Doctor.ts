@@ -1,17 +1,17 @@
 import mongoose, { Schema } from "mongoose";
-import { Gender, IPatient } from "../interface/IPatient";
+import { IDoctor } from "../interface/IDoctor";
 import { v4 as uuidv4 } from "uuid";
 
-const patientSchema = new Schema<IPatient>({
-    patientId: {
+const doctorSchema = new Schema<IDoctor>({
+    doctorId: {
         type: String,
-        default: uuidv4,
+        default: "DOC"+uuidv4,
         unique: true
     },
     name: {
         type: String,
         required: true,
-        minLength: 1
+        minlength: 1
     },
     email: {
         type: String,
@@ -21,12 +21,7 @@ const patientSchema = new Schema<IPatient>({
         type: String,
         required: true,
     },
-    age: {
-        type: Number,
-        required: true,
-        min: 0
-    },
-    gender: {
+    specialization: {
         type: String,
         required: true
     },
@@ -40,15 +35,19 @@ const patientSchema = new Schema<IPatient>({
     },
     verificationToken: {
         type: String,
-        required: false
-    },
-    uploadedFiles: {
-        type: String,
-        required: false
+        required: false,
     },
     profilePicture: {
         type: String,
-        required: false
+        required: false,
+    },
+    organisation: {
+        type: String,
+        required: true
+    },
+    accessLogs: {
+        type: String,
+        required: true
     }
 }, {
     timestamps: true,
@@ -56,4 +55,4 @@ const patientSchema = new Schema<IPatient>({
     toObject: { virtuals: true }
 });
 
-export const Patient = mongoose.model<IPatient>("Patient", patientSchema);
+export const Doctor = mongoose.model<IDoctor>("Doctor", doctorSchema);
