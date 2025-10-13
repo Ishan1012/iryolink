@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import { Types } from "mongoose";
 import { IPatient } from "../interface/IPatient";
 import { Patient } from "../model/Patient";
 
@@ -13,7 +13,7 @@ export class PatientRepository {
         return await Patient.findOne({ email }).exec();
     }
 
-    async findById(id: mongoose.Types.ObjectId): Promise<IPatient | null> {
+    async findById(id: Types.ObjectId): Promise<IPatient | null> {
         return await Patient.findById(id).exec();
     }
 
@@ -37,7 +37,7 @@ export class PatientRepository {
         return await Patient.find().exec();
     }
 
-    async deletePatient(id: string): Promise<void> {
+    async deletePatient(id: Types.ObjectId): Promise<void> {
         await Patient.findByIdAndDelete(id).exec();
     }
 }

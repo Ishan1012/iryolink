@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 const logSchema = new Schema<ILog>({
     logId: {
         type: String,
-        default: "l:"+uuidv4,
+        default: () => "LOG"+uuidv4(),
         unique: true
     },
     doctorId: {

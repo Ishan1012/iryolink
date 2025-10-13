@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 const datasetSchema = new Schema<IDataset> ({
     datasetId: {
         type: String,
-        default: "d:"+uuidv4,
+        default: () => "DATASET"+uuidv4(),
         unique: true,
     },
     patientId: {

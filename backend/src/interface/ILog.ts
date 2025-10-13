@@ -1,12 +1,12 @@
-import mongoose, { Document } from "mongoose";
+import { Document, Types } from "mongoose";
 
 export interface ILog extends Document {
     logId: string;
-    doctorId?: mongoose.Types.ObjectId;
+    doctorId?: Types.ObjectId;
     action: string;
     timestamp: Date;
     status: LogStatus;
-    datasetId?: mongoose.Types.ObjectId;
+    datasetId?: Types.ObjectId;
 }
 
 export type LogStatus = "PENDING"

@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 const doctorSchema = new Schema<IDoctor>({
     doctorId: {
         type: String,
-        default: "DOC"+uuidv4,
+        default: () => "DOC" + uuidv4(),
         unique: true
     },
     name: {
@@ -31,7 +31,7 @@ const doctorSchema = new Schema<IDoctor>({
     },
     verified: {
         type: Boolean,
-        required: true,
+        default: false
     },
     verificationToken: {
         type: String,
@@ -47,7 +47,7 @@ const doctorSchema = new Schema<IDoctor>({
     },
     accessLogs: {
         type: String,
-        required: true
+        required: false
     }
 }, {
     timestamps: true,

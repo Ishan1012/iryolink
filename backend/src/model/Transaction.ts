@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 const transactionSchema = new Schema<ITransaction> ({
     txHash: {
         type: String,
-        default: "t:"+uuidv4,
+        default: () => "TR"+uuidv4(),
         unique: true
     },
     datasetHash: {

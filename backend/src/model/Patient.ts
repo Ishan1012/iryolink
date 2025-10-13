@@ -36,7 +36,7 @@ const patientSchema = new Schema<IPatient>({
     },
     verified: {
         type: Boolean,
-        required: true,
+        default: false,
     },
     verificationToken: {
         type: String,

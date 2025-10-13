@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 const consentSchema = new Schema<IConsent> ({
     hash: {
         type: String,
-        default: "c:"+uuidv4,
+        default: () => "CONSENT"+uuidv4(),
         unique: true
     },
     patientAddress: {

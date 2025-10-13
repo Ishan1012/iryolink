@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import { Types } from "mongoose";
 import { ILog } from "../interface/ILog";
 import { Log } from "../model/Log";
 
@@ -16,7 +16,7 @@ export class LogRepository {
         return await Log.findOne({ logId }).exec();
     }
 
-    async findByDoctorId(doctorId: mongoose.Types.ObjectId): Promise<ILog[]> {
+    async findByDoctorId(doctorId: Types.ObjectId): Promise<ILog[]> {
         return await Log.find({ doctorId }).exec();
     }
 

@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import { Types } from "mongoose";
 import { IDataset } from "../interface/IDataset";
 import { Dataset } from "../model/Dataset";
 
@@ -8,7 +8,7 @@ export class DatasetRepository {
         return await newDataset.save();
     }
 
-    async findById(id: mongoose.Types.ObjectId): Promise<IDataset | null> {
+    async findById(id: Types.ObjectId): Promise<IDataset | null> {
         return await Dataset.findById(id).exec();
     }
 
@@ -16,11 +16,11 @@ export class DatasetRepository {
         return await Dataset.findOne({ datasetId }).exec();
     }
 
-    async findRecordsOfPatient(patientId: mongoose.Types.ObjectId): Promise<IDataset[]> {
+    async findRecordsOfPatient(patientId: Types.ObjectId): Promise<IDataset[]> {
         return await Dataset.find({ patientId }).exec();
     }
 
-    async findRecordsOfDoctor(doctorId: mongoose.Types.ObjectId): Promise<IDataset[]> {
+    async findRecordsOfDoctor(doctorId: Types.ObjectId): Promise<IDataset[]> {
         return await Dataset.find({ doctorId }).exec();
     }
     

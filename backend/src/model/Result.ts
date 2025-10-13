@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 const resultSchema = new Schema<IResult> ({
     resultId: {
         type: String,
-        default: "r:"+uuidv4,
+        default: () => "RES"+uuidv4(),
         unique: true
     },
     riskScore: {

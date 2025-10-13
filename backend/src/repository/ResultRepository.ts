@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import { Types } from "mongoose";
 import { IResult } from "../interface/IResult";
 import { Result } from "../model/Result";
 
@@ -8,7 +8,7 @@ export class ResultRepository {
         return await newResult.save();
     }
 
-    async findById(id: mongoose.Types.ObjectId): Promise<IResult | null> {
+    async findById(id: Types.ObjectId): Promise<IResult | null> {
         return await Result.findById(id).exec();
     }
 

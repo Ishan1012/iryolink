@@ -21,13 +21,13 @@ export class DoctorRepository {
         return await Doctor.findOne({ email }).exec();
     }
 
-    async isVerified(patientId: string): Promise<boolean | null> {
-        const doctor = await Doctor.findOne({ patientId }).select('verified').exec();
+    async isVerified(doctorId: string): Promise<boolean | null> {
+        const doctor = await Doctor.findOne({ doctorId }).select('verified').exec();
         return doctor?.verified ?? null;
     }
 
-    async getVerificationToken(patientId: string): Promise<string | null> {
-        const doctor = await Doctor.findOne({ patientId }).select('verificationToken').exec();
+    async getVerificationToken(doctorId: string): Promise<string | null> {
+        const doctor = await Doctor.findOne({ doctorId }).select('verificationToken').exec();
         return doctor?.verificationToken ?? null;
     }
 
