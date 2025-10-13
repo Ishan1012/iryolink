@@ -1,4 +1,4 @@
-import { Document } from "mongoose";
+import { Document, Types } from "mongoose";
 
 export interface IDoctor extends Document {
     doctorId: string;
@@ -11,7 +11,7 @@ export interface IDoctor extends Document {
     verificationToken?: string;
     profilePicture?: string;
     organisation: string;
-    accessLogs?: string;
+    accessLogs?: Types.ObjectId[];
     createdAt: Date;
     updatedAt: Date;
 }

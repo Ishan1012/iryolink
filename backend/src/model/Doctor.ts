@@ -46,7 +46,7 @@ const doctorSchema = new Schema<IDoctor>({
         required: true
     },
     accessLogs: {
-        type: String,
+        type: [String],
         required: false
     }
 }, {

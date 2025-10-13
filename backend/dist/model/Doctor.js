@@ -80,7 +80,7 @@ const doctorSchema = new mongoose_1.Schema({
         required: true
     },
     accessLogs: {
-        type: String,
+        type: [String],
         required: false
     }
 }, {
