@@ -23,6 +23,10 @@ export class DatasetRepository {
     async findRecordsOfDoctor(doctorId: Types.ObjectId): Promise<IDataset[]> {
         return await Dataset.find({ doctorId }).exec();
     }
+
+    async uploadFiles(datasetId: string, url: string): Promise<IDataset | null> {
+        return await Dataset.findOneAndUpdate({ datasetId }, { $set: { uploadedAt: url }});
+    }
     
     async getDatasetWithConsent(datasetId: string): Promise<IDataset | null> {
         return await Dataset.findOne({ datasetId }).populate('hash').exec();

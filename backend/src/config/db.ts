@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const connectDB = async(): Promise<void> => {
+const connectDB = async (): Promise<void> => {
     try {
         const uri = process.env.MONGO_URI || 'mongodb://localhost:27017/iryolink';
 

@@ -16,6 +16,7 @@ const doctorSchema = new Schema<IDoctor>({
     email: {
         type: String,
         required: true,
+        unique: true
     },
     password: {
         type: String,

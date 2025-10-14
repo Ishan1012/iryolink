@@ -13,7 +13,7 @@ if (!process.env.JWT_SECRET_KEY) {
 if (!process.env.JWT_TIMEOUT) {
     throw new Error("JWT_TIMEOUT environment veriable is not set");
 }
-const jwtSecretKey = process.env.JWT_TIMEOUT;
+const jwtSecretKey = process.env.JWT_SECRET_KEY;
 const jwtExpiration = process.env.JWT_TIMEOUT;
 class JwtService {
     constructor() {

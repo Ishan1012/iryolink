@@ -9,55 +9,57 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DatasetRepository = void 0;
-const Dataset_1 = require("../model/Dataset");
-class DatasetRepository {
+exports.DatasetService = void 0;
+const DatasetRepository_1 = require("../repository/DatasetRepository");
+class DatasetService {
+    constructor() {
+        this.datasetRepository = new DatasetRepository_1.DatasetRepository();
+    }
     saveDataset(dataset) {
         return __awaiter(this, void 0, void 0, function* () {
-            const newDataset = new Dataset_1.Dataset(dataset);
-            return yield newDataset.save();
+            return this.datasetRepository.saveDataset(dataset);
         });
     }
     findById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield Dataset_1.Dataset.findById(id).exec();
+            return this.datasetRepository.findById(id);
         });
     }
     findByDatasetId(datasetId) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield Dataset_1.Dataset.findOne({ datasetId }).exec();
+            return this.datasetRepository.findByDatasetId(datasetId);
+        });
+    }
+    updloadFiles(datasetId, url) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.datasetRepository.uploadFiles(datasetId, url);
         });
     }
     findRecordsOfPatient(patientId) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield Dataset_1.Dataset.find({ patientId }).exec();
+            return this.datasetRepository.findRecordsOfPatient(patientId);
         });
     }
     findRecordsOfDoctor(doctorId) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield Dataset_1.Dataset.find({ doctorId }).exec();
-        });
-    }
-    uploadFiles(datasetId, url) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return yield Dataset_1.Dataset.findOneAndUpdate({ datasetId }, { $set: { uploadedAt: url } });
+            return this.datasetRepository.findRecordsOfDoctor(doctorId);
         });
     }
     getDatasetWithConsent(datasetId) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield Dataset_1.Dataset.findOne({ datasetId }).populate('hash').exec();
+            return this.datasetRepository.getDatasetWithConsent(datasetId);
         });
     }
     getAllDatasets() {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield Dataset_1.Dataset.find().exec();
+            return this.datasetRepository.getAllDatasets();
         });
     }
     deleteDataset(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield Dataset_1.Dataset.findByIdAndDelete(id).exec();
+            return this.datasetRepository.deleteDataset(id);
         });
     }
 }
-exports.DatasetRepository = DatasetRepository;
-//# sourceMappingURL=DatasetRepository.js.map
+exports.DatasetService = DatasetService;
+//# sourceMappingURL=DatasetService.js.map

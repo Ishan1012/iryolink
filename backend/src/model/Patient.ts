@@ -16,6 +16,7 @@ const patientSchema = new Schema<IPatient>({
     email: {
         type: String,
         required: true,
+        unique: true
     },
     password: {
         type: String,
