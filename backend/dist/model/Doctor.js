@@ -54,7 +54,10 @@ const doctorSchema = new mongoose_1.Schema({
     },
     password: {
         type: String,
-        required: true,
+        required: function () {
+            // Only required if not OAuth
+            return !this.isOAuth;
+        },
     },
     specialization: {
         type: String,
@@ -63,6 +66,10 @@ const doctorSchema = new mongoose_1.Schema({
     contact: {
         type: String,
         required: true
+    },
+    isOAuth: {
+        type: Boolean,
+        required: true,
     },
     verified: {
         type: Boolean,

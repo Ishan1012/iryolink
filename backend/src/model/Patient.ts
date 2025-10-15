@@ -20,7 +20,10 @@ const patientSchema = new Schema<IPatient>({
     },
     password: {
         type: String,
-        required: true,
+        required: function (this: any) {
+            // Only required if not OAuth
+            return !this.isOAuth;
+        },
     },
     age: {
         type: Number,
@@ -34,6 +37,10 @@ const patientSchema = new Schema<IPatient>({
     contact: {
         type: String,
         required: true
+    },
+    isOAuth: {
+        type: Boolean,
+        required: true,
     },
     verified: {
         type: Boolean,

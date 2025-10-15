@@ -4,10 +4,11 @@ export interface IPatient extends Document {
     patientId: string;
     name: string;
     email: string;
-    password: string;
+    password?: string;
     age: number;
     gender: Gender;
     contact: string;
+    isOAuth: boolean;
     verified: boolean;
     verificationToken?: string;
     uploadedFiles?: string;

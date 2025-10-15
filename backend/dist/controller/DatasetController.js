@@ -25,7 +25,7 @@ const createDataset = (req, res) => __awaiter(void 0, void 0, void 0, function* 
 exports.createDataset = createDataset;
 const getDataset = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { datasetId } = req.params;
+        const datasetId = req.params.id;
         if (!datasetId) {
             return res.status(400).json({ success: false, message: "datasetId is required" });
         }
@@ -39,7 +39,7 @@ const getDataset = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 exports.getDataset = getDataset;
 const getDatasetWithConsent = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { datasetId } = req.params;
+        const datasetId = req.params.id;
         if (!datasetId) {
             return res.status(400).json({ success: false, message: "datasetId is required" });
         }
@@ -63,7 +63,7 @@ const getAllDatasets = (req, res) => __awaiter(void 0, void 0, void 0, function*
 exports.getAllDatasets = getAllDatasets;
 const findRecordsOfPatient = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { patientId } = req.params;
+        const patientId = req.params.id;
         if (!patientId) {
             return res.status(200).json({ success: false, message: "patientId is required" });
         }
@@ -72,13 +72,14 @@ const findRecordsOfPatient = (req, res) => __awaiter(void 0, void 0, void 0, fun
         return res.status(200).json({ success: true, dataset });
     }
     catch (error) {
+        console.log(error);
         return res.status(500).json({ success: false, message: "Internal server error", error });
     }
 });
 exports.findRecordsOfPatient = findRecordsOfPatient;
 const findRecordsOfDoctor = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { doctorId } = req.params;
+        const doctorId = req.params.id;
         if (!doctorId) {
             return res.status(200).json({ success: false, message: "doctorId is required" });
         }

@@ -20,7 +20,10 @@ const doctorSchema = new Schema<IDoctor>({
     },
     password: {
         type: String,
-        required: true,
+        required: function (this: any) {
+            // Only required if not OAuth
+            return !this.isOAuth;
+        },
     },
     specialization: {
         type: String,
@@ -29,6 +32,10 @@ const doctorSchema = new Schema<IDoctor>({
     contact: {
         type: String,
         required: true
+    },
+    isOAuth: {
+        type: Boolean,
+        required: true,
     },
     verified: {
         type: Boolean,

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { AuthService } from "../service/AuthService";
+import { AuthRequest } from "../middleware/auth";
 
 const authService = new AuthService();
 
@@ -45,14 +46,41 @@ export const signin = async (req: Request, res: Response) => {
     }
 };
 
-// export const me = async (req: Request, res: Response) => {
-//     try {
-//         const user = await authService.getMe(req);
-//         return res.status(200).json({ success: true, user });
-//     } catch (error) {
-//         return res.status(500).json({ success: false, message: "Internal server error", error: error.message });
-//     }
-// };
+export const me = async (req: AuthRequest, res: Response) => {
+    try {
+        const user = req.user;
+
+        if(!user) {
+            return res.status(401).json({ success: false, message: "No user found!" });
+        }
+
+        if(!user.userId) {
+            return res.status(401).json({ success: false, message: "No userId found!" });
+        }
+
+        if(user.role === "Patient") {
+            const patient = await authService.getPatientByPatientId(user.userId);
+            if (!patient) {
+                return res.status(404).json({ success: false, message: "Patient not found!" });
+            }
+            return res.status(200).json({ success: true, user: patient });
+        } else if(user.role === "Doctor") {
+            const doctor = await authService.getDoctorByDoctorId(user.userId);
+            if (!doctor) {
+                return res.status(404).json({ success: false, message: "Doctor not found!" });
+            }
+            return res.status(200).json({ success: true, user: doctor });
+        } else {
+            return res.status(401).json({ success: false, message: "Unauthorized user role!" });
+        }
+    } catch (error) {
+        if(error instanceof Error) {
+            return res.status(500).json({ success: false, message: "Internal server error", error: error.message });
+        } else {
+            return res.status(500).json({ success: false, message: "Internal server error", error: String(error) });
+        }
+    }
+};
 
 // export const updateProfile = async (req: Request, res: Response) => {
 //     try {

@@ -8,12 +8,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DoctorService = void 0;
-const mongoose_1 = __importDefault(require("mongoose"));
+const mongoose_1 = require("mongoose");
 const DoctorRepository_1 = require("../repository/DoctorRepository");
 class DoctorService {
     constructor() {
@@ -26,7 +23,7 @@ class DoctorService {
     }
     findById(ids) {
         return __awaiter(this, void 0, void 0, function* () {
-            const id = new mongoose_1.default.Types.ObjectId(ids);
+            const id = new mongoose_1.Types.ObjectId(ids);
             return this.doctorRepository.findById(id);
         });
     }

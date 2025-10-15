@@ -20,7 +20,7 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.signin = exports.signup = void 0;
+exports.me = exports.signin = exports.signup = void 0;
 const AuthService_1 = require("../service/AuthService");
 const authService = new AuthService_1.AuthService();
 const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -73,14 +73,43 @@ const signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.signin = signin;
-// export const me = async (req: Request, res: Response) => {
-//     try {
-//         const user = await authService.getMe(req);
-//         return res.status(200).json({ success: true, user });
-//     } catch (error) {
-//         return res.status(500).json({ success: false, message: "Internal server error", error: error.message });
-//     }
-// };
+const me = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const user = req.user;
+        if (!user) {
+            return res.status(401).json({ success: false, message: "No user found!" });
+        }
+        if (!user.userId) {
+            return res.status(401).json({ success: false, message: "No userId found!" });
+        }
+        if (user.role === "Patient") {
+            const patient = yield authService.getPatientByPatientId(user.userId);
+            if (!patient) {
+                return res.status(404).json({ success: false, message: "Patient not found!" });
+            }
+            return res.status(200).json({ success: true, user: patient });
+        }
+        else if (user.role === "Doctor") {
+            const doctor = yield authService.getDoctorByDoctorId(user.userId);
+            if (!doctor) {
+                return res.status(404).json({ success: false, message: "Doctor not found!" });
+            }
+            return res.status(200).json({ success: true, user: doctor });
+        }
+        else {
+            return res.status(401).json({ success: false, message: "Unauthorized user role!" });
+        }
+    }
+    catch (error) {
+        if (error instanceof Error) {
+            return res.status(500).json({ success: false, message: "Internal server error", error: error.message });
+        }
+        else {
+            return res.status(500).json({ success: false, message: "Internal server error", error: String(error) });
+        }
+    }
+});
+exports.me = me;
 // export const updateProfile = async (req: Request, res: Response) => {
 //     try {
 //         const updatedUser = await authService.updateProfile(req.body, req);

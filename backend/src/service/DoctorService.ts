@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import { Types } from "mongoose";
 import { IDoctor } from "../interface/IDoctor";
 import { DoctorRepository } from "../repository/DoctorRepository";
 
@@ -14,7 +14,7 @@ export class DoctorService {
     }
 
     async findById(ids: string): Promise<IDoctor | null> {
-        const id = new mongoose.Types.ObjectId(ids);
+        const id = new Types.ObjectId(ids);
         return this.doctorRepository.findById(id);
     }
 

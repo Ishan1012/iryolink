@@ -3,9 +3,10 @@ export interface IDoctor extends Document {
     doctorId: string;
     name: string;
     email: string;
-    password: string;
+    password?: string;
     specialization: string;
     contact: string;
+    isOAuth: boolean;
     verified: boolean;
     verificationToken?: string;
     profilePicture?: string;

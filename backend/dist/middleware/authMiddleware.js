@@ -17,7 +17,6 @@ const verifyToken = (req, res, next) => {
         }
         const token = authHeader.split(" ")[1];
         const decoded = jsonwebtoken_1.default.verify(token, SECRET_KEY);
-        console.log(decoded);
         req.user = decoded;
         next();
     }
