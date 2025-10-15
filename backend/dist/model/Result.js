@@ -52,7 +52,7 @@ const resultSchema = new mongoose_1.Schema({
         required: true,
         minLength: 1
     },
-    trandCategory: {
+    trendCategory: {
         type: String,
         required: true,
         minLength: 1

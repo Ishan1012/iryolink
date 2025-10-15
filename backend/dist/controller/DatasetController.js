@@ -16,10 +16,13 @@ const datasetService = new DatasetService_1.DatasetService();
 const createDataset = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const dataset = yield datasetService.saveDataset(req.body);
+        if (!dataset) {
+            return res.status(400).json({ success: false, message: "Failed to create dataset" });
+        }
         return res.status(200).json({ success: true, dataset });
     }
     catch (error) {
-        return res.status(500).json({ success: false, message: "Internal server error", error });
+        return res.status(500).json({ success: false, message: "Internal server error", error: String(error) });
     }
 });
 exports.createDataset = createDataset;
@@ -30,10 +33,13 @@ const getDataset = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             return res.status(400).json({ success: false, message: "datasetId is required" });
         }
         const dataset = yield datasetService.findByDatasetId(datasetId);
+        if (!dataset) {
+            return res.status(404).json({ success: false, message: "Dataset not found" });
+        }
         return res.status(200).json({ success: true, dataset });
     }
     catch (error) {
-        return res.status(500).json({ success: false, message: "Internal server error", error });
+        return res.status(500).json({ success: false, message: "Internal server error", error: String(error) });
     }
 });
 exports.getDataset = getDataset;
@@ -44,20 +50,26 @@ const getDatasetWithConsent = (req, res) => __awaiter(void 0, void 0, void 0, fu
             return res.status(400).json({ success: false, message: "datasetId is required" });
         }
         const dataset = yield datasetService.getDatasetWithConsent(datasetId);
+        if (!dataset) {
+            return res.status(404).json({ success: false, message: "Dataset not found" });
+        }
         return res.status(200).json({ success: true, dataset });
     }
     catch (error) {
-        return res.status(500).json({ success: false, message: "Internal server error", error });
+        return res.status(500).json({ success: false, message: "Internal server error", error: String(error) });
     }
 });
 exports.getDatasetWithConsent = getDatasetWithConsent;
 const getAllDatasets = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const datasets = yield datasetService.getAllDatasets();
+        if (!datasets || datasets.length === 0) {
+            return res.status(404).json({ success: false, message: "Datasets not found" });
+        }
         return res.status(200).json({ success: true, datasets });
     }
     catch (error) {
-        return res.status(500).json({ success: false, message: "Internal server error", error });
+        return res.status(500).json({ success: false, message: "Internal server error", error: String(error) });
     }
 });
 exports.getAllDatasets = getAllDatasets;
@@ -69,11 +81,14 @@ const findRecordsOfPatient = (req, res) => __awaiter(void 0, void 0, void 0, fun
         }
         const objectId = new mongoose_1.Types.ObjectId(patientId);
         const dataset = yield datasetService.findRecordsOfPatient(objectId);
+        if (!dataset) {
+            return res.status(404).json({ success: false, message: "Dataset not found" });
+        }
         return res.status(200).json({ success: true, dataset });
     }
     catch (error) {
         console.log(error);
-        return res.status(500).json({ success: false, message: "Internal server error", error });
+        return res.status(500).json({ success: false, message: "Internal server error", error: String(error) });
     }
 });
 exports.findRecordsOfPatient = findRecordsOfPatient;
@@ -85,10 +100,13 @@ const findRecordsOfDoctor = (req, res) => __awaiter(void 0, void 0, void 0, func
         }
         const objectId = new mongoose_1.Types.ObjectId(doctorId);
         const dataset = yield datasetService.findRecordsOfDoctor(objectId);
+        if (!dataset) {
+            return res.status(404).json({ success: false, message: "Dataset not found" });
+        }
         return res.status(200).json({ success: true, dataset });
     }
     catch (error) {
-        return res.status(500).json({ success: false, message: "Internal server error", error });
+        return res.status(500).json({ success: false, message: "Internal server error", error: String(error) });
     }
 });
 exports.findRecordsOfDoctor = findRecordsOfDoctor;

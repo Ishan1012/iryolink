@@ -9,45 +9,50 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ResultRepository = void 0;
-const Result_1 = require("../model/Result");
-class ResultRepository {
+exports.ResultService = void 0;
+const mongoose_1 = require("mongoose");
+const ResultRepository_1 = require("../repository/ResultRepository");
+class ResultService {
+    constructor() {
+        this.resultRepository = new ResultRepository_1.ResultRepository();
+    }
     saveResult(result) {
         return __awaiter(this, void 0, void 0, function* () {
-            const newResult = new Result_1.Result(result);
-            return yield newResult.save();
+            return this.resultRepository.saveResult(result);
         });
     }
     findById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield Result_1.Result.findById(id).exec();
+            const ids = new mongoose_1.Types.ObjectId(id);
+            return this.resultRepository.findById(ids);
         });
     }
-    findByResultId(resultId) {
+    findByResultId(datasetId) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield Result_1.Result.findOne({ resultId }).exec();
-        });
-    }
-    findByTrends(trendCategory) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return yield Result_1.Result.find({ trendCategory }).exec();
+            return this.resultRepository.findByResultId(datasetId);
         });
     }
     findResultsOfDataset(datasetId) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield Result_1.Result.find({ datasetId }).exec();
+            const datasetIds = new mongoose_1.Types.ObjectId(datasetId);
+            return this.resultRepository.findResultsOfDataset(datasetIds);
+        });
+    }
+    findByTrends(trendCategory) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.resultRepository.findByTrends(trendCategory);
         });
     }
     findByPatientId(patientId) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield Result_1.Result.find({ patientId }).exec();
+            return this.resultRepository.findByPatientId(patientId);
         });
     }
     getAllResults() {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield Result_1.Result.find().exec();
+            return this.resultRepository.getAllResults();
         });
     }
 }
-exports.ResultRepository = ResultRepository;
-//# sourceMappingURL=ResultRepository.js.map
+exports.ResultService = ResultService;
+//# sourceMappingURL=ResultService.js.map

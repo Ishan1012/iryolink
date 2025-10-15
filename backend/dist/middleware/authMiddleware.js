@@ -71,6 +71,7 @@ const requireAdminRoleOrDoctorRole = (req, res, next) => {
             message: "Please connect with your adminstrator to access this resource.",
         });
     }
+    console.log("Reached");
     next();
 };
 exports.requireAdminRoleOrDoctorRole = requireAdminRoleOrDoctorRole;

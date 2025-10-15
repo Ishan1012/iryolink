@@ -8,15 +8,21 @@ export const signup = async (req: Request, res: Response) => {
     try {
         if (req.body.usertype === "patient") {
             const createdPatient = await authService.signUpPatient(req.body);
+            if(!createdPatient) {
+                return res.status(400).json({ success: false, message: "unable to create user!" });
+            }
             return res.status(201).json({ success: true, user: createdPatient });
         } else if (req.body.usertype === "doctor") {
             const createdDoctor = await authService.signUpDoctor(req.body);
+            if(!createdDoctor) {
+                return res.status(400).json({ success: false, message: "unable to create user!" });
+            }
             return res.status(201).json({ success: true, user: createdDoctor });
         } else {
             return res.status(401).json({ success: false, message: "invalid usertype!" });
         }
     } catch (error) {
-        return res.status(500).json({ success: false, message: "Internal server error", error });
+        return res.status(500).json({ success: false, message: "Internal server error", error: String(error) });
     }
 };
 
@@ -42,7 +48,7 @@ export const signin = async (req: Request, res: Response) => {
             return res.status(401).json({ success: false, message: "invalid usertype!" });
         }
     } catch (error) {
-        return res.status(500).json({ success: false, message: "Internal server error", error });
+        return res.status(500).json({ success: false, message: "Internal server error", error: String(error) });
     }
 };
 

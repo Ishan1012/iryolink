@@ -3,7 +3,7 @@ export interface IResult extends Document {
     resultId: string;
     riskScore: number;
     predictedCondition: string;
-    trandCategory: string;
+    trendCategory: string;
     computedAt: Date;
     patientId?: Types.ObjectId;
     datasetId?: Types.ObjectId;

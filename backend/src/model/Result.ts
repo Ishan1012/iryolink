@@ -18,7 +18,7 @@ const resultSchema = new Schema<IResult> ({
         required: true,
         minLength: 1
     },
-    trandCategory: {
+    trendCategory: {
         type: String,
         required: true,
         minLength: 1

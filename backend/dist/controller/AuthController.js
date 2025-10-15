@@ -27,10 +27,16 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         if (req.body.usertype === "patient") {
             const createdPatient = yield authService.signUpPatient(req.body);
+            if (!createdPatient) {
+                return res.status(400).json({ success: false, message: "unable to create user!" });
+            }
             return res.status(201).json({ success: true, user: createdPatient });
         }
         else if (req.body.usertype === "doctor") {
             const createdDoctor = yield authService.signUpDoctor(req.body);
+            if (!createdDoctor) {
+                return res.status(400).json({ success: false, message: "unable to create user!" });
+            }
             return res.status(201).json({ success: true, user: createdDoctor });
         }
         else {
@@ -38,7 +44,7 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         }
     }
     catch (error) {
-        return res.status(500).json({ success: false, message: "Internal server error", error });
+        return res.status(500).json({ success: false, message: "Internal server error", error: String(error) });
     }
 });
 exports.signup = signup;
@@ -69,7 +75,7 @@ const signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         }
     }
     catch (error) {
-        return res.status(500).json({ success: false, message: "Internal server error", error });
+        return res.status(500).json({ success: false, message: "Internal server error", error: String(error) });
     }
 });
 exports.signin = signin;

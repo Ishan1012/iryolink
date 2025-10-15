@@ -5,6 +5,7 @@ export declare class ResultRepository {
     findById(id: Types.ObjectId): Promise<IResult | null>;
     findByResultId(resultId: string): Promise<IResult | null>;
     findByTrends(trendCategory: string): Promise<IResult[]>;
+    findResultsOfDataset(datasetId: Types.ObjectId): Promise<any[]>;
     findByPatientId(patientId: string): Promise<IResult[]>;
     getAllResults(): Promise<IResult[]>;
 }

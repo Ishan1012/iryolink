@@ -4,7 +4,7 @@ import { requireAdminRole, requireAdminRoleOrDoctorRole, verifyToken } from "../
 
 const router = express.Router();
 
-router.post("/dataset", verifyToken, createDataset);
+router.post("/dataset", verifyToken, requireAdminRoleOrDoctorRole, createDataset);
 router.get("/dataset/:id", verifyToken, getDataset);
 router.get("/dataset/consent/:id", verifyToken, getDatasetWithConsent);
 router.get("/dataset/patient/:id", verifyToken, findRecordsOfPatient);

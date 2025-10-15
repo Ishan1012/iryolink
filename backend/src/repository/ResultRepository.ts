@@ -20,6 +20,10 @@ export class ResultRepository {
         return await Result.find({ trendCategory }).exec();
     }
 
+    async findResultsOfDataset(datasetId: Types.ObjectId): Promise<any[]> {
+        return await Result.find({ datasetId }).exec();
+    }
+
     async findByPatientId(patientId: string): Promise<IResult[]> {
         return await Result.find({ patientId }).exec();
     }
