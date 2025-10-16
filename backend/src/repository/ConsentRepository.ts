@@ -3,9 +3,17 @@ import { IConsent } from "../interface/IConsent";
 import { Consent } from "../model/Consent";
 
 export class ConsentRepository {
-    async saveConsent(consent: Partial<IConsent>): Promise<IConsent | null> {
+    async giveConsent(consent: Partial<IConsent>): Promise<IConsent | null> {
         const newConsent = new Consent(consent);
         return await newConsent.save();
+    }
+
+    async grantConsent(consentId: string): Promise<IConsent | null> {
+        return await Consent.findOneAndUpdate({ hash: consentId }, { granted: true }, { new: true }).exec();
+    }
+
+    async revokeConsent(consentId: string): Promise<IConsent | null> {
+        return await Consent.findOneAndUpdate({ hash: consentId }, { granted: false }, { new: true }).exec();
     }
 
     async findById(id: mongoose.Types.ObjectId): Promise<IConsent | null> {
@@ -20,7 +28,7 @@ export class ConsentRepository {
         return await Consent.findOne({ patientAddress }).exec();
     }
 
-    async findPendingConsents(): Promise<IConsent | null> {
+    async findRevokedConsents(): Promise<IConsent | null> {
         return await Consent.findOne({ granted: false }).exec();
     }
 

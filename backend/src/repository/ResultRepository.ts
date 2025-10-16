@@ -8,6 +8,14 @@ export class ResultRepository {
         return await newResult.save();
     }
 
+    async addDatasetToResult(resultId: string, datasetId: Types.ObjectId): Promise<IResult | null> {
+        return await Result.findOneAndUpdate(
+            { resultId },
+            { datasetId },
+            { new: true }
+        ).exec();
+    }
+
     async findById(id: Types.ObjectId): Promise<IResult | null> {
         return await Result.findById(id).exec();
     }

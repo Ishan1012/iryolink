@@ -7,5 +7,6 @@ export interface ILog extends Document {
     status: LogStatus;
     datasetId?: Types.ObjectId;
 }
-export type LogStatus = "PENDING" | "IN_PROGRESS" | "SUCCESS" | "FAILED" | "CANCELLED" | "RETRY";
+export declare const LogStatusValues: readonly ["PENDING", "IN_PROGRESS", "SUCCESS", "FAILED", "CANCELLED", "RETRY"];
+export type LogStatus = typeof LogStatusValues[number];
 //# sourceMappingURL=ILog.d.ts.map

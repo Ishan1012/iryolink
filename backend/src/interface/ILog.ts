@@ -9,9 +9,13 @@ export interface ILog extends Document {
     datasetId?: Types.ObjectId;
 }
 
-export type LogStatus = "PENDING"
-  | "IN_PROGRESS"
-  | "SUCCESS"
-  | "FAILED"
-  | "CANCELLED"
-  | "RETRY";
+export const LogStatusValues = [
+  "PENDING",
+  "IN_PROGRESS",
+  "SUCCESS",
+  "FAILED",
+  "CANCELLED",
+  "RETRY",
+] as const;
+
+export type LogStatus = typeof LogStatusValues[number];

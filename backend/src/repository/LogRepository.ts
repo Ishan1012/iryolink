@@ -1,5 +1,5 @@
 import { Types } from "mongoose";
-import { ILog } from "../interface/ILog";
+import { ILog, LogStatus } from "../interface/ILog";
 import { Log } from "../model/Log";
 
 export class LogRepository {
@@ -8,7 +8,7 @@ export class LogRepository {
         return await newLog.save();
     }
 
-    async findById(id: string): Promise<ILog | null> {
+    async findById(id: Types.ObjectId): Promise<ILog | null> {
         return await Log.findById(id).exec();
     }
 
@@ -22,6 +22,10 @@ export class LogRepository {
 
     async findLogsOnDate(timestamp: Date): Promise<ILog[]> {
         return await Log.find({ timestamp }).exec();
+    }
+
+    async updateStatusByLogId(logId: string, status: LogStatus): Promise<ILog | null> {
+        return await Log.findOneAndUpdate({ logId }, { status }, { new: true }).exec();
     }
 
     async getAllLogs(): Promise<ILog[]> {

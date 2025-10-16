@@ -22,7 +22,8 @@ const logSchema = new Schema<ILog>({
     },
     status: {
         type: String,
-        default: "IN_PROGRESS"
+        enum: [ "PENDING", "IN_PROGRESS", "SUCCESS", "FAILED", "CANCELLED", "RETRY" ],
+        default: "PENDING"
     },
     datasetId: {
         type: Schema.Types.ObjectId,

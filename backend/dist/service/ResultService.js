@@ -18,39 +18,45 @@ class ResultService {
     }
     saveResult(result) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.resultRepository.saveResult(result);
+            return yield this.resultRepository.saveResult(result);
+        });
+    }
+    addDatasetToResult(resultId, datasetId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const datasetIds = new mongoose_1.Types.ObjectId(datasetId);
+            return yield this.resultRepository.addDatasetToResult(resultId, datasetIds);
         });
     }
     findById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             const ids = new mongoose_1.Types.ObjectId(id);
-            return this.resultRepository.findById(ids);
+            return yield this.resultRepository.findById(ids);
         });
     }
     findByResultId(datasetId) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.resultRepository.findByResultId(datasetId);
+            return yield this.resultRepository.findByResultId(datasetId);
         });
     }
     findResultsOfDataset(datasetId) {
         return __awaiter(this, void 0, void 0, function* () {
             const datasetIds = new mongoose_1.Types.ObjectId(datasetId);
-            return this.resultRepository.findResultsOfDataset(datasetIds);
+            return yield this.resultRepository.findResultsOfDataset(datasetIds);
         });
     }
     findByTrends(trendCategory) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.resultRepository.findByTrends(trendCategory);
+            return yield this.resultRepository.findByTrends(trendCategory);
         });
     }
     findByPatientId(patientId) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.resultRepository.findByPatientId(patientId);
+            return yield this.resultRepository.findByPatientId(patientId);
         });
     }
     getAllResults() {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.resultRepository.getAllResults();
+            return yield this.resultRepository.getAllResults();
         });
     }
 }

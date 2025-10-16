@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TransactionRepository = void 0;
 const Transaction_1 = require("../model/Transaction");
 class TransactionRepository {
-    saveTransaction(transaction) {
+    logTransaction(transaction) {
         return __awaiter(this, void 0, void 0, function* () {
             const newTransaction = new Transaction_1.Transaction(transaction);
             return yield newTransaction.save();
@@ -26,6 +26,11 @@ class TransactionRepository {
     verifyTransaction(txHash) {
         return __awaiter(this, void 0, void 0, function* () {
             return yield Transaction_1.Transaction.findOne({ txHash }).exec();
+        });
+    }
+    updateTransactionStatus(transactionId, status) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield Transaction_1.Transaction.findOneAndUpdate({ transactionId }, { status }, { new: true }).exec();
         });
     }
     findByDataset(datasetHash) {

@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllResults = exports.getResultsByPatientId = exports.getResultsByTrends = exports.getResultsOfDataset = exports.getResultById = exports.saveResult = void 0;
+exports.getAllResults = exports.getResultsByPatientId = exports.getResultsByTrends = exports.getResultsOfDataset = exports.getResultById = exports.addDatasetToResult = exports.saveResult = void 0;
 const ResultService_1 = require("../service/ResultService");
 const resultService = new ResultService_1.ResultService();
 const saveResult = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -25,6 +25,21 @@ const saveResult = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.saveResult = saveResult;
+const addDatasetToResult = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const resultId = req.params.id;
+        const datasetId = req.body.datasetId;
+        const updatedResult = yield resultService.addDatasetToResult(resultId, datasetId);
+        if (!updatedResult) {
+            return res.status(404).json({ success: false, message: "Result not found" });
+        }
+        return res.status(200).json({ success: true, result: updatedResult });
+    }
+    catch (error) {
+        return res.status(500).json({ success: false, message: "Failed to add dataset to result", error: String(error) });
+    }
+});
+exports.addDatasetToResult = addDatasetToResult;
 const getResultById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const resultId = req.params.id;

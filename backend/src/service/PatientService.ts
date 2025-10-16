@@ -10,36 +10,36 @@ export class PatientService {
     }
 
     async savePatient(patient: Partial<IPatient>): Promise<IPatient | null> {
-        return this.patientRepository.savePatient(patient);
+        return await this.patientRepository.savePatient(patient);
     }
 
     async findById(ids: string): Promise<IPatient | null> {
         const id = new mongoose.Types.ObjectId(ids);
-        return this.patientRepository.findById(id);
+        return await this.patientRepository.findById(id);
     }
 
     async findByEmail(email: string): Promise<IPatient | null> {
-        return this.patientRepository.findByEmail(email);
+        return await this.patientRepository.findByEmail(email);
     }
 
     async findByPatientId(patientId: string): Promise<IPatient | null> {
-        return this.patientRepository.findByPatientId(patientId);
+        return await this.patientRepository.findByPatientId(patientId);
     }
 
     async isVerified(patientId: string): Promise<boolean | null> {
-        return this.patientRepository.isVerified(patientId);
+        return await this.patientRepository.isVerified(patientId);
     }
 
     async getVerificationToken(patientId: string): Promise<string | null> {
-        return this.patientRepository.getVerificationToken(patientId);
+        return await this.patientRepository.getVerificationToken(patientId);
     }
 
     async getAllPatients(): Promise<IPatient[]> {
-        return this.patientRepository.getAllPatients();
+        return await this.patientRepository.getAllPatients();
     }
 
     async deletePatient(ids: string): Promise<void> {
         const id = new mongoose.Types.ObjectId(ids);
-        this.patientRepository.deletePatient(id);
+        await this.patientRepository.deletePatient(id);
     }
 }

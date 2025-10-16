@@ -10,38 +10,38 @@ export class DatasetService {
     }
 
     async saveDataset(dataset: Partial<IDataset>): Promise<IDataset | null> {
-        return this.datasetRepository.saveDataset(dataset);
+        return await this.datasetRepository.saveDataset(dataset);
     }
 
     async findById(id: Types.ObjectId): Promise<IDataset | null> {
-        return this.datasetRepository.findById(id);
+        return await this.datasetRepository.findById(id);
     }
 
     async findByDatasetId(datasetId: string): Promise<IDataset | null> {
-        return this.datasetRepository.findByDatasetId(datasetId);
+        return await this.datasetRepository.findByDatasetId(datasetId);
     }
 
     async updloadFiles(datasetId: string, url: string): Promise<IDataset | null> {
-        return this.datasetRepository.uploadFiles(datasetId, url);
+        return await this.datasetRepository.uploadFiles(datasetId, url);
     }
 
     async findRecordsOfPatient(patientId: Types.ObjectId): Promise<IDataset[]> {
-        return this.datasetRepository.findRecordsOfPatient(patientId);
+        return await this.datasetRepository.findRecordsOfPatient(patientId);
     }
 
     async findRecordsOfDoctor(doctorId: Types.ObjectId): Promise<IDataset[]> {
-        return this.datasetRepository.findRecordsOfDoctor(doctorId);
+        return await this.datasetRepository.findRecordsOfDoctor(doctorId);
     }
 
     async getDatasetWithConsent(datasetId: string): Promise<IDataset | null> {
-        return this.datasetRepository.getDatasetWithConsent(datasetId);
+        return await this.datasetRepository.getDatasetWithConsent(datasetId);
     }
 
     async getAllDatasets(): Promise<IDataset[]> {
-        return this.datasetRepository.getAllDatasets();
+        return await this.datasetRepository.getAllDatasets();
     }
 
     async deleteDataset(id: string): Promise<void> {
-        return this.datasetRepository.deleteDataset(id);
+        return await this.datasetRepository.deleteDataset(id);
     }
 }

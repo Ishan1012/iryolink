@@ -38,6 +38,11 @@ class LogRepository {
             return yield Log_1.Log.find({ timestamp }).exec();
         });
     }
+    updateStatusByLogId(logId, status) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield Log_1.Log.findOneAndUpdate({ logId }, { status }, { new: true }).exec();
+        });
+    }
     getAllLogs() {
         return __awaiter(this, void 0, void 0, function* () {
             return yield Log_1.Log.find();

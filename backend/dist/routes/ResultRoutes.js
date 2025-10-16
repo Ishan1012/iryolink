@@ -9,6 +9,7 @@ const ResultController_1 = require("../controller/ResultController");
 const router = express_1.default.Router();
 router.post("/result", authMiddleware_1.verifyToken, ResultController_1.saveResult);
 router.get("/result/:id", authMiddleware_1.verifyToken, ResultController_1.getResultById);
+router.put("/result/:id", authMiddleware_1.verifyToken, ResultController_1.addDatasetToResult);
 router.get("/result/dataset/:id", authMiddleware_1.verifyToken, ResultController_1.getResultsOfDataset);
 router.get("/result/trends/:category", authMiddleware_1.verifyToken, ResultController_1.getResultsByTrends);
 router.get("/result/patient/:id", authMiddleware_1.verifyToken, ResultController_1.getResultsByPatientId);

@@ -15,6 +15,21 @@ export const saveResult = async (req: Request, res: Response) => {
     }
 };
 
+export const addDatasetToResult = async (req: Request, res: Response) => {
+    try {
+        const resultId = req.params.id as string;
+        const datasetId = req.body.datasetId as string;
+        const updatedResult = await resultService.addDatasetToResult(resultId, datasetId);
+
+        if (!updatedResult) {
+            return res.status(404).json({ success: false, message: "Result not found" });
+        }
+        return res.status(200).json({ success: true, result: updatedResult });
+    } catch (error) {
+        return res.status(500).json({ success: false, message: "Failed to add dataset to result", error: String(error) });
+    }
+}
+
 export const getResultById = async (req: Request, res: Response) => {
     try {
         const resultId = req.params.id as string;

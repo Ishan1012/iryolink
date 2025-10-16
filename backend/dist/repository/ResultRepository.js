@@ -18,6 +18,11 @@ class ResultRepository {
             return yield newResult.save();
         });
     }
+    addDatasetToResult(resultId, datasetId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield Result_1.Result.findOneAndUpdate({ resultId }, { datasetId }, { new: true }).exec();
+        });
+    }
     findById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             return yield Result_1.Result.findById(id).exec();

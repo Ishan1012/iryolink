@@ -18,43 +18,43 @@ class DoctorService {
     }
     saveDoctor(doctor) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.doctorRepository.saveDoctor(doctor);
+            return yield this.doctorRepository.saveDoctor(doctor);
         });
     }
     findById(ids) {
         return __awaiter(this, void 0, void 0, function* () {
             const id = new mongoose_1.Types.ObjectId(ids);
-            return this.doctorRepository.findById(id);
+            return yield this.doctorRepository.findById(id);
         });
     }
     findByDoctorId(doctorId) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.doctorRepository.findByDoctorId(doctorId);
+            return yield this.doctorRepository.findByDoctorId(doctorId);
         });
     }
     findByEmail(email) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.doctorRepository.findByEmail(email);
+            return yield this.doctorRepository.findByEmail(email);
         });
     }
     isVerified(doctorId) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.doctorRepository.isVerified(doctorId);
+            return yield this.doctorRepository.isVerified(doctorId);
         });
     }
     getVerificationToken(doctorId) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.doctorRepository.getVerificationToken(doctorId);
+            return yield this.doctorRepository.getVerificationToken(doctorId);
         });
     }
     getAllDoctors() {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.doctorRepository.getAllDoctors();
+            return yield this.doctorRepository.getAllDoctors();
         });
     }
     deleteDoctor(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.doctorRepository.deleteDoctor(id);
+            return yield this.doctorRepository.deleteDoctor(id);
         });
     }
 }

@@ -12,10 +12,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ConsentRepository = void 0;
 const Consent_1 = require("../model/Consent");
 class ConsentRepository {
-    saveConsent(consent) {
+    giveConsent(consent) {
         return __awaiter(this, void 0, void 0, function* () {
             const newConsent = new Consent_1.Consent(consent);
             return yield newConsent.save();
+        });
+    }
+    grantConsent(consentId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield Consent_1.Consent.findOneAndUpdate({ hash: consentId }, { granted: true }, { new: true }).exec();
+        });
+    }
+    revokeConsent(consentId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield Consent_1.Consent.findOneAndUpdate({ hash: consentId }, { granted: false }, { new: true }).exec();
         });
     }
     findById(id) {
@@ -33,7 +43,7 @@ class ConsentRepository {
             return yield Consent_1.Consent.findOne({ patientAddress }).exec();
         });
     }
-    findPendingConsents() {
+    findRevokedConsents() {
         return __awaiter(this, void 0, void 0, function* () {
             return yield Consent_1.Consent.findOne({ granted: false }).exec();
         });

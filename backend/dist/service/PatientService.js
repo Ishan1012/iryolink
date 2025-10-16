@@ -21,44 +21,44 @@ class PatientService {
     }
     savePatient(patient) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.patientRepository.savePatient(patient);
+            return yield this.patientRepository.savePatient(patient);
         });
     }
     findById(ids) {
         return __awaiter(this, void 0, void 0, function* () {
             const id = new mongoose_1.default.Types.ObjectId(ids);
-            return this.patientRepository.findById(id);
+            return yield this.patientRepository.findById(id);
         });
     }
     findByEmail(email) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.patientRepository.findByEmail(email);
+            return yield this.patientRepository.findByEmail(email);
         });
     }
     findByPatientId(patientId) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.patientRepository.findByPatientId(patientId);
+            return yield this.patientRepository.findByPatientId(patientId);
         });
     }
     isVerified(patientId) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.patientRepository.isVerified(patientId);
+            return yield this.patientRepository.isVerified(patientId);
         });
     }
     getVerificationToken(patientId) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.patientRepository.getVerificationToken(patientId);
+            return yield this.patientRepository.getVerificationToken(patientId);
         });
     }
     getAllPatients() {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.patientRepository.getAllPatients();
+            return yield this.patientRepository.getAllPatients();
         });
     }
     deletePatient(ids) {
         return __awaiter(this, void 0, void 0, function* () {
             const id = new mongoose_1.default.Types.ObjectId(ids);
-            this.patientRepository.deletePatient(id);
+            yield this.patientRepository.deletePatient(id);
         });
     }
 }

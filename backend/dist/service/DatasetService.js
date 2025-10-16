@@ -17,47 +17,47 @@ class DatasetService {
     }
     saveDataset(dataset) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.datasetRepository.saveDataset(dataset);
+            return yield this.datasetRepository.saveDataset(dataset);
         });
     }
     findById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.datasetRepository.findById(id);
+            return yield this.datasetRepository.findById(id);
         });
     }
     findByDatasetId(datasetId) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.datasetRepository.findByDatasetId(datasetId);
+            return yield this.datasetRepository.findByDatasetId(datasetId);
         });
     }
     updloadFiles(datasetId, url) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.datasetRepository.uploadFiles(datasetId, url);
+            return yield this.datasetRepository.uploadFiles(datasetId, url);
         });
     }
     findRecordsOfPatient(patientId) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.datasetRepository.findRecordsOfPatient(patientId);
+            return yield this.datasetRepository.findRecordsOfPatient(patientId);
         });
     }
     findRecordsOfDoctor(doctorId) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.datasetRepository.findRecordsOfDoctor(doctorId);
+            return yield this.datasetRepository.findRecordsOfDoctor(doctorId);
         });
     }
     getDatasetWithConsent(datasetId) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.datasetRepository.getDatasetWithConsent(datasetId);
+            return yield this.datasetRepository.getDatasetWithConsent(datasetId);
         });
     }
     getAllDatasets() {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.datasetRepository.getAllDatasets();
+            return yield this.datasetRepository.getAllDatasets();
         });
     }
     deleteDataset(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.datasetRepository.deleteDataset(id);
+            return yield this.datasetRepository.deleteDataset(id);
         });
     }
 }
